@@ -1,0 +1,29 @@
+{
+  "name": "paper-review",
+  "version": "1.0.0",
+  "description": "Multi-role academic peer review with expert cross-review and venue-ready review fields.",
+  "author": {
+    "name": "freemty",
+    "url": "https://github.com/freemty"
+  },
+  "homepage": "https://github.com/freemty/paper-review",
+  "repository": "https://github.com/freemty/paper-review",
+  "license": "MIT",
+  "keywords": ["paper-review", "academic", "research", "codex", "skills"],
+  "skills": "./",
+  "interface": {
+    "displayName": "Paper Review",
+    "shortDescription": "Generate rigorous academic peer reviews from multiple expert perspectives.",
+    "longDescription": "Paper Review coordinates a structured multi-role review process for academic manuscripts, then formats findings into venue-ready review fields with a secondary review-quality audit.",
+    "developerName": "freemty",
+    "category": "Research",
+    "capabilities": ["Interactive", "Write"],
+    "websiteURL": "https://github.com/freemty/paper-review",
+    "defaultPrompt": [
+      "Review this paper like an expert reviewer.",
+      "Audit this review for weak reasoning.",
+      "Generate venue-ready review fields."
+    ],
+    "brandColor": "#B45309"
+  }
+}

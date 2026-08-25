@@ -1,6 +1,6 @@
 ---
 name: paper-review
-description: Use when a complete research paper or submission PDF needs an evidence-grounded peer review.
+description: Use when a complete research paper or submission PDF needs an evidence-grounded peer review. Triggers on a paper PDF shared for peer review, a venue submission form (OpenReview/CMT/HotCRP), or a paper path with a venue name or target score.
 ---
 
 # Paper Review

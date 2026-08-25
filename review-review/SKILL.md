@@ -1,6 +1,6 @@
 ---
 name: review-review
-description: Use when a draft peer review needs adversarial checking for hallucinations, fairness, feasibility, or score-tone consistency.
+description: Use when a draft peer review needs adversarial checking for hallucinations, fairness, feasibility, or score-tone consistency. Triggers on "check my review", "audit review", "review-review", or a completed review draft plus paper PDF in the conversation.
 ---
 
 # Review Review

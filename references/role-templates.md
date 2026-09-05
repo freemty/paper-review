@@ -1,48 +1,16 @@
 # Reviewer Role Templates
 
-## Role Prompt Structure
+## Role contract
 
-Each reviewer subagent needs a fully self-contained prompt. The subagent has no access to the PDF and no context from the main conversation. Everything it needs must be in the prompt.
+Supply paper title, venue/contribution type if known, accessible paper/supplement
+paths, coverage limitations, and the question this lens should answer. A reviewer
+can use available native readers or text/page artifacts directly. Do not assume
+it cannot open a PDF, and do not replace source access with a huge summary.
 
-## Required Sections in Every Role Prompt
-
-### 1. Identity Block
-```
-You are Reviewer [A/B/C/D]: a senior researcher specializing in [specific area].
-You are reviewing "[paper title]" ([venue] submission #[number]) under the
-**[contribution type]** contribution type.
-```
-
-### 2. Paper Summary Block
-Include ALL of the following:
-- Core idea in 2-3 sentences
-- Method pipeline (numbered steps with specific technical details)
-- Architecture choices (model sizes, context lengths, key hyperparameters)
-- Training setup (datasets with sizes, hardware, training time)
-- Quantitative results (reproduce key tables with numbers)
-- Ablation results (reproduce tables)
-- Supplementary findings (if any)
-- Limitations acknowledged by authors
-
-This block is typically 300-600 words. Err on the side of too much detail — the reviewer cannot go back and check the paper.
-
-### 3. Analytical Focus Block
-Give 4-6 specific questions tailored to this role. These should be pointed, not generic. Good focus questions reference specific design choices, numbers, or claims from the paper.
-
-**Bad**: "Is the method novel?"
-**Good**: "The paper claims xyz ordering outperforms Hilbert curves (Table 2, CE 2.444 vs 2.497). Given that 3D RoPE already encodes spatial proximity, is the serialization ordering ablation actually testing the right thing?"
-
-### 4. Output Format Block
-```
-Output format:
-- **Strengths** (3-5 bullet points)
-- **Major Weaknesses** (3-5 bullet points)
-- **Minor Weaknesses** (2-3 bullet points)
-- **Score Recommendation** ([venue-specific scale])
-- **Key Questions for Authors** (2-3 questions)
-
-Be rigorous but fair given the [contribution type] CT.
-```
+Return supported strengths, material weaknesses, precise locators, unresolved
+questions and confidence. Role count and number of findings depend on the paper.
+Do not manufacture issues to fill a quota. A role may run in the main thread when
+independent delegation is unavailable. No role submits or archives the review.
 
 ## Role-Specific Focus Areas
 

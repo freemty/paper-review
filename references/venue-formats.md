@@ -1,5 +1,10 @@
 # Venue-Specific Review Formats
 
+These are historical orientation examples, not current venue policy. The supplied
+form and current official reviewer guidance take precedence. Verify scale, fields,
+contribution types and rebuttal window for the actual year; do not infer them from
+OpenReview/CMT/HotCRP as a platform.
+
 ## OpenReview Venues (ECCV, NeurIPS, ICLR, EMNLP)
 
 ### Common Fields

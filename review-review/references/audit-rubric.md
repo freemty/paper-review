@@ -10,7 +10,11 @@ Adversarial audit of a draft peer review against the source paper. Catches hallu
 
 ## How It Works
 
-Spawn a single subagent that receives: (1) the full draft review text, (2) extracted paper data from Phase 1. The subagent runs 7 checks and returns a pass/fail verdict per check with specific fix suggestions.
+Audit the draft against accessible original paper/supplement artifacts. When
+independent delegation is appropriate and available, pass those paths and the
+draft to a read-only reviewer; otherwise perform the checks in the main thread.
+Apply the relevant dimensions and report unverified claims when source coverage
+is missing.
 
 ## The 7 Checks
 
@@ -23,7 +27,7 @@ For every factual claim in the review (numbers, method details, what the paper d
 - Method descriptions match what the paper actually proposes
 - Cited sections/figures/equations exist and contain what the review says
 
-Output: list of claims with `VERIFIED` or `HALLUCINATION: [what paper actually says]`
+Output: `VERIFIED`, `CONTRADICTED` or `UNVERIFIED`, with the supporting/missing locator.
 
 ### 2. AI Voice Detection
 
@@ -47,12 +51,12 @@ Check that content matches its field:
 
 Output: `PASS` or `MISMATCH: [field] contains [wrong content type]`
 
-### 4. Rebuttal Feasibility (7-Day Rule)
+### 4. Rebuttal Feasibility
 
 For each suggestion in "Suggestions for Rebuttal":
-- Can it be done in 7 days without retraining?
+- Can it be done within the actual venue's rebuttal window and realistic resources?
 - Does it require new data collection? Flag.
-- Does it require >1 GPU-day of compute? Flag.
+- Does it require substantial compute? Distinguish a necessary validity concern from a requested rebuttal action.
 - Is it a clarification, analysis, or small experiment? Pass.
 
 Feasible examples: report timing, add error bars, run 3 seeds, state grid resolution, plot a curve from existing data
@@ -62,8 +66,8 @@ Output: per-suggestion `FEASIBLE` or `INFEASIBLE: [reason + suggested alternativ
 
 ### 5. Number Placement Check
 
-- Paper Summary: should contain zero specific numbers. Reference "Table 1" not "FID 77".
-- Strengths: should contain zero specific numbers. Reference figures/tables.
+- Paper Summary: use numbers only where necessary to explain the result, with a locator.
+- Strengths: exact numbers are useful when central to the strength; keep the claim sourced.
 - Major Weaknesses: numbers OK when making a precise technical argument.
 - Minor Weaknesses: numbers OK for pinpointing (e.g., "Eq 6, line 292").
 
@@ -94,11 +98,12 @@ Output: `CONSISTENT` or `INCONSISTENT: score is [X] but language reads as [Y]`
 When spawning the audit subagent, include:
 
 1. The complete draft review (all fields, verbatim)
-2. Key paper data extracted in Phase 1 (tables with numbers, method details, acknowledged limitations)
+2. Accessible paper/supplement paths and evidence locators; declare excerpt-only limits if paths cannot be read
 3. The 7 checks listed above with their output format
-4. Instruction: "For each check, output PASS or FAIL with specific evidence. Be adversarial. Assume the review contains errors until proven otherwise."
+4. Return evidence-supported corrections and unknowns; do not fabricate failure findings.
 
-Use `subagent_type: "labmate:domain-expert"` if available, otherwise general-purpose.
+Use any appropriate available read-only reviewer; a named LabMate agent is optional.
+If delegation is disabled, the same rubric applies in the main thread.
 
 ## Output Format
 

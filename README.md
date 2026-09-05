@@ -1,58 +1,31 @@
 # paper-review
 
-Multi-role academic peer review that produces submission-ready output matching venue form fields. Four expert reviewers cross-review independently, then a consensus synthesis produces calibrated, evidence-grounded reviews.
+Version 1.1.0. Evidence-grounded academic reviews from a complete manuscript,
+with optional independent role analysis and a main-thread fallback.
 
-## When to Use
+Read the actual paper and requested supplements; record missing pages, figures,
+equations or experiments. Select review perspectives for the paper's risks, not
+a fixed four reviewers. Reconcile disagreements against source evidence and
+deliver the requested review in full. No field-by-field approval is required
+unless the user asks for that interaction.
 
-- You have a paper PDF and want a thorough mock review before submission
-- Preparing for a venue deadline and want to stress-test weaknesses
-- Acting as reviewer and want structured, multi-perspective analysis
-- Need review output formatted for a specific venue (OpenReview/CMT/HotCRP)
+Use the current venue/year form supplied by the user or verify its official
+instructions. Bundled venue formats are historical examples, not current rules.
+Scores follow evidence; a requested target score cannot justify invented praise
+or criticism. Nothing is submitted to a review portal automatically.
 
-## Usage
+## Installation and invocation
 
-```
-/paper-review                        # auto-detect from conversation
-/paper-review path/to/paper.pdf      # review a specific PDF
-/paper-review paper.pdf NeurIPS      # specify venue format
-/paper-review paper.pdf ECCV 5       # specify venue + target score
-```
+Codex: install paper-review from the yuanbo-skills plugin marketplace; use
+`$paper-review:paper-review` or the skill selector. Do not also install global
+symlinks for these plugin skills.
 
-## How it works
+Other Agent Skills hosts can install this skill folder through their supported
+installer and use natural language or their selector. Claude's standalone skill
+installation supports `/paper-review`; no Claude plugin manifest is distributed
+by this repository.
 
-1. **Read & Extract** — full paper + supplementary, extract metadata, method pipeline, key numbers
-2. **Assign 4 Expert Roles** — domain, modeling, experiments, systems (adapted per paper type)
-3. **Parallel Independent Reviews** — 4 subagents review concurrently with self-contained prompts
-4. **Cross-Review** — consensus matrix: what's agreed, majority, unique, or disagreed
-5. **Synthesize** — venue-formatted final review with score-tone calibration
-6. **Iterative Delivery** — field-by-field output with user confirmation at each step
+Review-quality checks use `review-review/references/audit-rubric.md` as needed.
+Missing evidence is unverified, not automatically a hallucination.
 
-## Supported Venues
-
-| Platform | Venues | Score Scale |
-|----------|--------|-------------|
-| OpenReview | ECCV, NeurIPS, ICLR, EMNLP | 1-6 / 1-10 (varies) |
-| CMT | CVPR, AAAI | 1-10 |
-| HotCRP | ACL, NAACL | 1-5 |
-
-Custom venue forms are also supported — paste the form and it adapts.
-
-## Install
-
-### Via skills.sh (recommended)
-
-```bash
-npx skills add freemty/paper-review
-```
-
-Works with Claude Code, Cursor, Codex, Windsurf, and [15+ other agents](https://skills.sh).
-
-### Manual
-
-```bash
-git clone https://github.com/freemty/paper-review.git ~/.claude/skills/paper-review
-```
-
-## License
-
-MIT
+MIT.

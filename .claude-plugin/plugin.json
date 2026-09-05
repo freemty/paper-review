@@ -1,0 +1,9 @@
+{
+  "name": "paper-review",
+  "version": "1.1.0",
+  "description": "Evidence-grounded paper review and review-quality audit.",
+  "author": {"name": "freemty"},
+  "repository": "https://github.com/freemty/paper-review",
+  "license": "MIT",
+  "skills": ["./", "./review-review"]
+}
